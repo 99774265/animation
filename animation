@@ -1,0 +1,137 @@
+# after the balck circle make one more white animation 
+import simplegui
+import random 
+
+x = -100
+y = 500
+t = 1300
+c = 300
+r = -600
+h = 400
+w = 600
+red = 0
+green = 225
+blue = 10
+
+    
+    
+def draw_handler(canvas):
+
+    global x
+    global t 
+    global c
+    global h
+    global r
+    global y
+    global w
+    c=c-3
+    t=t-3
+    x=x+3.6
+    y= y+3
+    r=r+3
+    h=h+10
+    w=w-0.27
+    
+    
+    
+    
+
+    
+    # cloud left
+    canvas.draw_circle((c+400, 100), 20, 3, "#DFF2FA", "#DFF2FA") 
+    canvas.draw_circle((c+360, 100), 20, 3, "#DFF2FA", "#DFF2FA")
+    canvas.draw_circle((c+380, 125), 20, 3, "#DFF2FA", "#DFF2FA")
+    canvas.draw_circle((c+420, 125), 20, 3, "#DFF2FA", "#DFF2FA") 
+    canvas.draw_circle((c+343, 125), 20, 3, "#DFF2FA", "#DFF2FA")
+    
+    
+    #cloud left
+    canvas.draw_circle((c+100, 100), 20, 3, "#DFF2FA", "#DFF2FA") 
+    canvas.draw_circle((c+60, 100), 20, 3, "#DFF2FA", "#DFF2FA")
+    canvas.draw_circle((c+80, 125), 20, 3, "#DFF2FA", "#DFF2FA")
+    canvas.draw_circle((c+120, 125), 20, 3, "#DFF2FA", "#DFF2FA") 
+    canvas.draw_circle((c+43, 125), 20, 3, "#DFF2FA", "#DFF2FA")
+    
+    
+    
+    #car X(
+    canvas.draw_circle((x, 375), 100, 3, "white", "red")
+    canvas.draw_polygon([(0, 420), (600, 420), (600, 375), (0,375)], 1, "lightblue", "lightblue")
+    canvas.draw_line((x-50, 375), (x+50, 375), 4, "black")
+    canvas.draw_circle((x+75, 375), 25, 3, "white", "gray") 
+    canvas.draw_circle((x-75, 375), 25, 3, "red", "gray") 
+    canvas.draw_circle((x+75, 375), 5, 3, "red", "gray") 
+    canvas.draw_circle((x-75, 375), 5, 3, "white", "gray")
+    if x > 800:
+         x = -300
+        
+    
+#trees
+#try to sync the cars second moement with the trees by using an if statement or for loop?
+
+
+    
+    canvas.draw_circle((t+140, 220), 70, 1, "black", "#5BB33C")
+    canvas.draw_polygon([(t+160, 260), (t+120, 260), (t+120, 400), (t+160,400)], 1, "black", "#C19A6B")
+    
+    canvas.draw_circle((t+540, 220), 70, 1, "black", "#5BB33C")
+    canvas.draw_polygon([(t+560, 260), (t+520, 260), (t+520, 400), (t+560,400)], 1, "black", "#C19A6B")
+
+
+
+    if t < -500:
+        canvas.draw_polygon([(0, 0), (600, 0), (600, 500), (0,500)], 1, "black", "lightblue")
+    
+        #snow
+    if c<-500:
+        for i in range(10):
+            d = random.randint(0,600) 
+            l = random.randint(0,500)
+            canvas.draw_circle((d, l), 5, 1,"blue", "white")
+        
+     
+     
+    #rain
+    if c < -100:
+        for i in range(5):
+            d = random.randint(0,600) 
+            l = random.randint(0,500)
+            canvas.draw_line((l, d), (d,l), 1, "blue")
+    
+    
+     #ground/snow
+    canvas.draw_polygon([(0, 400), (600, 400), (600, 500), (0,500)], 1, "black", "#5BB33C")
+    canvas.draw_polygon([(0, 0+w), (600, 0+w), (600, 500), (0,500)], 1, "black", "#EBF3F4")
+    
+
+    
+    
+    # #expanding bubble
+    if w<580:
+        canvas.draw_circle((r/20, 20), h/15, 3, "red", "black")
+    
+    if h > 10000:
+        for red in range(260):
+            color = "rgb(" + str(red) + ", " + str(red-green) + ", " + str(blue) + ")"
+            canvas.draw_text("THE END", (25, 50 + red), red/2 + 1, color)
+        
+            canvas.draw_line((50,320), (500,320), 5, "blue")
+            canvas.draw_line((30, 340), (540, 340), 5, "blue")
+            if c<-2000:
+                for i in range(10):
+                    d = random.randint(0,600) 
+                    l = random.randint(0,500)
+                    canvas.draw_line((l, d), (d,l), 1, "white")
+        
+     
+     
+
+        
+    
+    
+    
+
+frame = simplegui.create_frame("kms", 600, 500)
+frame.set_canvas_background("lightblue")
+frame.set_draw_handler(draw_handler)
+frame.start()
